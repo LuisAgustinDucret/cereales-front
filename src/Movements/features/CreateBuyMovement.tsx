@@ -47,13 +47,14 @@ const CreateBuyMovement = ({ navigateToMovements }: CreateMovementsProps) => {
     console.log("startFetch :>> ", data);
     startFetch();
 
+    console.log(data);
     createMovements({
-      warehouseDestinyId: data.warehouseDestinyId.value,
-      stockMovementDetail: data.stockMovementDetail.map((product) => ({
-        productId: product.product.productId,
-        quantity: product.quantity,
-        buyPrice: product.buyPrice,
+      stockMovementDetail: data.stockMovementDetail.map((detail) => ({
+        productId: detail.product.id,
+        quantity: detail.quantity,
+        buyPrice: detail.buyPrice,
       })),
+      warehouseDestinyId: data.warehouseDestinyId.value,
       date: new Date(),
       description: data.description,
       movementType: data.movementType,

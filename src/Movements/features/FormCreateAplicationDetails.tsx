@@ -15,8 +15,6 @@ const FormCreateAplicationDetails = () => {
     append({
       product: null as any,
       quantity: 0,
-      buyPrice: 0,
-      description: "",
     });
   }, [append]);
 

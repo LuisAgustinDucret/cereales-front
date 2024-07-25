@@ -1,12 +1,11 @@
 import { Box, Center, IconButton, Stack } from "@chakra-ui/react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { FormInputText, FormSelect } from "Base/components";
-import FormInputNumber from "Base/components/FormInputNumber";
 import FormSectionLayout from "Base/layout/FormSectionLayout";
 import useCreateAplicationContext from "Movements/contexts/CreateBuyContext/hooks/useCreateAplicationContext";
 import { Controller } from "react-hook-form";
 import useProductsOptions from "Movements/hooks/useProductsOptions";
-import { OnChangeValue, SingleValue } from "chakra-react-select";
+import { OnChangeValue } from "chakra-react-select";
 import OptionItem from "Base/types/OptionItem";
 
 interface FormCreateOwnerProps {
@@ -60,11 +59,11 @@ const FormCreateAplicationDetail = ({ index }: FormCreateOwnerProps) => {
                 options={options}
                 value={
                   field.value &&
-                  "productId" in field.value &&
-                  field.value.productId !== null
+                  "id" in field.value &&
+                  typeof field.value.id === "number"
                     ? {
                         label: field.value.description,
-                        value: field.value.productId,
+                        value: field.value.id,
                       }
                     : null
                 }
@@ -77,7 +76,7 @@ const FormCreateAplicationDetail = ({ index }: FormCreateOwnerProps) => {
                     optionSelected
                       ? {
                           description: optionSelected.label,
-                          productId: optionSelected.value,
+                          id: optionSelected.value,
                         }
                       : null
                   );
@@ -92,13 +91,13 @@ const FormCreateAplicationDetail = ({ index }: FormCreateOwnerProps) => {
             isRequired
             errorMessage={
               errors.stockMovementDetail &&
-              errors.stockMovementDetail[index]?.description
+              errors.stockMovementDetail[index]?.quantity
                 ? "movement error"
                 : undefined
             }
-            inputProps={register(`stockMovementDetail.${index}.description`)}
+            inputProps={register(`stockMovementDetail.${index}.quantity`)}
             label={"Cantidad"}
-            name="description"
+            name="quantity"
           />
         </FormSectionLayout>
       </Stack>

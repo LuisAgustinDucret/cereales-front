@@ -32,31 +32,13 @@ export const productOptionItem = z.object({
 
 export const StockMovementDetailSchema = z.object({
   product: productOptionItem,
-  quantity: z.string().transform((val, ctx) => {
-    const parsed = Number.parseInt(val.replaceAll(".", ""), 10);
-    if (Number.isNaN(parsed)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Required",
-      });
-
-      return z.NEVER;
-    }
-    if (parsed <= 0) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "mustBePositive",
-      });
-
-      return z.NEVER;
-    }
-    return parsed;
-  }),
+  quantity: z.number(),
+  buyPrice: z.number().optional(),
 });
 
 export type StockMovementDetail = z.infer<typeof StockMovementDetailSchema>;
 
-const createAplicationSchema = z.object({
+const viewMovementSchemas = z.object({
   description: z.string(),
   movementType: z.string(),
   warehouseOriginId: warehouseOptionItem,
@@ -84,6 +66,6 @@ const createAplicationSchema = z.object({
   stockMovementDetail: z.array(StockMovementDetailSchema),
 });
 
-export type CreateAplicationSchema = z.infer<typeof createAplicationSchema>;
+export type ViewMovementSchemas = z.infer<typeof viewMovementSchemas>;
 
-export default createAplicationSchema;
+export default viewMovementSchemas;
