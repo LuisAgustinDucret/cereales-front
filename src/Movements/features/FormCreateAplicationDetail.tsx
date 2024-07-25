@@ -99,21 +99,6 @@ const FormCreateAplicationDetail = ({ index }: FormCreateOwnerProps) => {
             label={"Cantidad"}
             name="quantity"
           />
-          <FormInputNumber
-            isRequired
-            control={control}
-            errorMessage={
-              errors.stockMovementDetail &&
-              errors.stockMovementDetail[index]?.value
-                ? `errors.${errors.stockMovementDetail[index]?.value?.message}`
-                : // TODO: Deberia eleminar este casteo: `as string`
-                  undefined
-            }
-            id="value"
-            label={"Valor"}
-            leftIcon="$"
-            name={`stockMovementDetail.${index}.value`}
-          />
         </FormSectionLayout>
       </Stack>
     </Center>
