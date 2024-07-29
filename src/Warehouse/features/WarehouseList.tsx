@@ -1,16 +1,15 @@
-import { useMemo } from "react";
-
-import { useTranslation } from "Base/i18n";
+import { useCallback, useMemo } from "react";
 import DataTable, { BaseColumn } from "Base/components/DataTable";
-
 import {
   Warehouse,
   useAllWarehouseService,
 } from "Warehouse/data/WarehouseRepository";
 
-const WarehouseList = () => {
-  const { t } = useTranslation("warehouse");
+interface WarehouseListProps {
+  navigateToDetails: (warehouseId: number) => void;
+}
 
+const WarehouseList = ({ navigateToDetails }: WarehouseListProps) => {
   const { loading, warehouseList } = useAllWarehouseService();
 
   const columns: BaseColumn<Warehouse>[] = useMemo(
@@ -20,16 +19,29 @@ const WarehouseList = () => {
         selector: (row) => row.id,
       },
       {
-        label: t("datatable.label.description"),
+        label: "Descripcion",
         selector: (row) => row.description,
       },
     ],
-    [t]
+    []
+  );
+
+  const handleClickMovement = useCallback(
+    (row: Warehouse) => {
+      console.log(row.id)
+      navigateToDetails(row.id);
+    },
+    [navigateToDetails]
   );
 
   return (
     <>
-      <DataTable columns={columns} data={warehouseList} loading={loading} />
+      <DataTable
+        columns={columns}
+        data={warehouseList}
+        loading={loading}
+        onClickRow={handleClickMovement}
+      />
     </>
   );
 };
