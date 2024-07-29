@@ -4,6 +4,8 @@ import { Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import PageLayout from "Base/layout/PageLayout";
 import CreateWarehouse from "Warehouse/features/CreateWarehouse";
+import { withAuth } from "@kushitech/auth-module";
+import { User } from "Auth/types";
 
 const WarehouseCreatePage = () => {
   const { t } = useTranslation("warehouse");
@@ -23,7 +25,7 @@ const WarehouseCreatePage = () => {
   );
 };
 
-/* export const getServerSideProps = withAuth<User>(async (ctx, user) => {
+export const getServerSideProps = withAuth<User>(async (ctx, user) => {
   if (user.role === "USER") {
     // eslint-disable-next-line no-console
     console.log("You dont have permission on  :>> ", ctx.resolvedUrl);
@@ -39,6 +41,6 @@ const WarehouseCreatePage = () => {
       user,
     },
   };
-}); */
+});
 
 export default WarehouseCreatePage;
