@@ -68,10 +68,9 @@ const CreateAplicationMovement = ({
     startFetch();
 
     createMovements({
-      stockMovementDetail: data.stockMovementDetail.map((product) => ({
-        productId: product.product.productId,
-        quantity: product.quantity,
-        buyPrice: product.buyPrice,
+      stockMovementDetail: data.stockMovementDetail.map((detail) => ({
+        quantity: detail.quantity,
+        productId: detail.product.id,
       })),
       date: new Date(),
       description: data.description,

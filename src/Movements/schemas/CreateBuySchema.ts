@@ -7,16 +7,34 @@ export const warehouseOptionItem = z.object({
 });
 
 export const productOptionItem = z.object({
-  productId: z.number(),
+  id: z.number(),
   description: z.string(),
+  minimumQuantity: z.number().optional(),
 });
 
 export const StockMovementDetailSchema = z.object({
   product: productOptionItem,
-  quantity: z.number(),
-  buyPrice: z.number().optional(),
-  description: z.string().min(1, { message: "Required" }),
-  value: z.string().transform((val, ctx) => {
+  quantity: z.string().transform((val, ctx) => {
+    const parsed = Number.parseInt(val.replaceAll(".", ""), 10);
+    if (Number.isNaN(parsed)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Required",
+      });
+
+      return z.NEVER;
+    }
+    if (parsed <= 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "mustBePositive",
+      });
+
+      return z.NEVER;
+    }
+    return parsed;
+  }),
+  buyPrice: z.string().transform((val, ctx) => {
     const parsed = Number.parseInt(val.replaceAll(".", ""), 10);
     if (Number.isNaN(parsed)) {
       ctx.addIssue({
@@ -37,6 +55,7 @@ export const StockMovementDetailSchema = z.object({
     return parsed;
   }),
 });
+
 export type StockMovementDetail = z.infer<typeof StockMovementDetailSchema>;
 
 const createBuySchema = z.object({

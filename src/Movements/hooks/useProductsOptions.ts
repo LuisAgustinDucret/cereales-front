@@ -9,7 +9,6 @@ interface UseProductsOptionsReturn {
 
 const useProductsOptions = (): UseProductsOptionsReturn => {
   const { productList, loading, error } = useAllProductService();
-
   return {
     options: productList.map((product) => ({
       label: `${product.description}`,

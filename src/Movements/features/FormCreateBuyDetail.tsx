@@ -59,12 +59,12 @@ const FormCreateBuyDetail = ({ index }: FormCreateOwnerProps) => {
                 name={field.name}
                 options={options}
                 value={
-                  field.value &&
-                  "productId" in field.value &&
-                  field.value.productId !== null
+                  field.value && 
+                  "id" in field.value && 
+                  typeof field.value.id === 'number'
                     ? {
                         label: field.value.description,
-                        value: field.value.productId,
+                        value: field.value.id,
                       }
                     : null
                 }
@@ -77,7 +77,7 @@ const FormCreateBuyDetail = ({ index }: FormCreateOwnerProps) => {
                     optionSelected
                       ? {
                           description: optionSelected.label,
-                          productId: optionSelected.value,
+                          id: optionSelected.value,
                         }
                       : null
                   );
@@ -90,30 +90,24 @@ const FormCreateBuyDetail = ({ index }: FormCreateOwnerProps) => {
 
           <FormInputText
             isRequired
-            errorMessage={
-              errors.stockMovementDetail &&
-              errors.stockMovementDetail[index]?.description
-                ? "movement error"
-                : undefined
-            }
-            inputProps={register(`stockMovementDetail.${index}.description`)}
+            inputProps={register(`stockMovementDetail.${index}.quantity`)}
             label={"Cantidad"}
-            name="description"
+            name="quantity"
           />
           <FormInputNumber
             isRequired
             control={control}
             errorMessage={
               errors.stockMovementDetail &&
-              errors.stockMovementDetail[index]?.value
-                ? `errors.${errors.stockMovementDetail[index]?.value?.message}`
+              errors.stockMovementDetail[index]?.buyPrice
+                ? `errors.${errors.stockMovementDetail[index]?.buyPrice?.message}`
                 : // TODO: Deberia eleminar este casteo: `as string`
                   undefined
             }
             id="value"
             label={"Valor de compra"}
             leftIcon="$"
-            name={`stockMovementDetail.${index}.value`}
+            name={`stockMovementDetail.${index}.buyPrice`}
           />
         </FormSectionLayout>
       </Stack>

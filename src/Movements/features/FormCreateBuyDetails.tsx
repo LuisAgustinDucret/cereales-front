@@ -16,8 +16,6 @@ const FormCreateBuyDetails = () => {
       product: null as any,
       quantity: 0,
       buyPrice: 0,
-      value: 0,
-      description: "",
     });
   }, [append]);
 
