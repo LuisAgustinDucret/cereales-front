@@ -12,7 +12,7 @@ const useWareHouseOptions = (): UseWareHouseOptionsReturn => {
 
   return {
     options: warehouseList.map((wh) => ({
-      label: `${wh.description}`,
+      label: wh.description,
       value: wh.id,
       description: wh.description,
     })),
