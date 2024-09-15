@@ -1,10 +1,11 @@
 import { useCallback } from "react";
 import { useRouter } from "next/router";
-import { useForm, FormProvider, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Heading } from "@chakra-ui/react";
 
 import createBuySchema, {
+  CreateBuyDefaultValues,
   CreateBuySchema,
 } from "Movements/schemas/CreateBuySchema";
 import { CreateBuyMovement } from "Movements/features";
@@ -13,9 +14,8 @@ import CreateBuyProvider from "Movements/contexts/CreateBuyContext/CreateBuyProv
 
 const MovementCreatePage = () => {
   const router = useRouter();
-  const methods = useForm<CreateBuySchema>({
+  const methods = useForm<CreateBuyDefaultValues, unknown, CreateBuySchema>({
     resolver: zodResolver(createBuySchema),
-    //remover hardcodeo
     defaultValues: {
       movementType: "BUY",
       date: new Date(),
@@ -35,23 +35,21 @@ const MovementCreatePage = () => {
   });
 
   return (
-    <FormProvider {...methods}>
-      <CreateBuyProvider
-        {...methods}
-        stockMovementDetail={stockMovementsArrayMethods}
-      >
-        <PageLayout>
-          {{
-            header: (
-              <Heading>{"Completar los datos de compra de productos"}</Heading>
-            ),
-            content: (
-              <CreateBuyMovement navigateToMovements={navigateToMovements} />
-            ),
-          }}
-        </PageLayout>
-      </CreateBuyProvider>
-    </FormProvider>
+    <CreateBuyProvider
+      {...methods}
+      stockMovementDetail={stockMovementsArrayMethods}
+    >
+      <PageLayout>
+        {{
+          header: (
+            <Heading>{"Completar los datos de compra de productos"}</Heading>
+          ),
+          content: (
+            <CreateBuyMovement navigateToMovements={navigateToMovements} />
+          ),
+        }}
+      </PageLayout>
+    </CreateBuyProvider>
   );
 };
 

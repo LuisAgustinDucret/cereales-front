@@ -87,5 +87,6 @@ const createBuySchema = z.object({
 });
 
 export type CreateBuySchema = z.infer<typeof createBuySchema>;
+export type CreateBuyDefaultValues = z.input<typeof createBuySchema>;
 
 export default createBuySchema;

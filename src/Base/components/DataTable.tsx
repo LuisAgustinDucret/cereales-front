@@ -64,16 +64,16 @@ function DataTable<T>({
                   bg: "neutral.200",
                   cursor: "pointer",
                 }}
-                onClick={onClickRow ? () => onClickRow(row) : undefined}
+                // onClick={onClickRow ? () => onClickRow(row) : undefined}
               >
-                {columns.map(({ styles, onClick, selector, label }) => (
+                {columns.map(({ styles, selector, label }) => (
                   <Td
                     key={`td-row-${label}-${index}`}
                     borderColor="neutral.300"
                     borderWidth="1px"
                     px={3}
                     py={3}
-                    onClick={onClick ? () => onClick(row) : undefined}
+                    onClick={onClickRow && label !== "Acciones" ? () => onClickRow(row) : undefined}
                     {...styles}
                   >
                     {selector(row)}
