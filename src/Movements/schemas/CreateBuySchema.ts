@@ -64,7 +64,9 @@ const createBuySchema = z.object({
   date: z.date(),
   stockMovementDetail: z.array(StockMovementDetailSchema),
   value: z.string().transform((val, ctx) => {
-    const parsed = Number.parseInt(val.replaceAll(".", ""), 10);
+    const parsed = Number.parseFloat(
+      val.replaceAll(".", "").replaceAll(",", ".")
+    );
     if (Number.isNaN(parsed)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
