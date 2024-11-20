@@ -33,7 +33,9 @@ export const productOptionItem = z.object({
 export const StockMovementDetailSchema = z.object({
   product: productOptionItem,
   quantity: z.string().transform((val, ctx) => {
-    const parsed = Number.parseInt(val.replaceAll(".", ""), 10);
+    const parsed = Number.parseFloat(
+      val.replaceAll(".", "").replaceAll(",", ".")
+    );
     if (Number.isNaN(parsed)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

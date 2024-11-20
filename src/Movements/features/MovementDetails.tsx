@@ -66,6 +66,14 @@ const MovementDetails = ({ movement }: MovementDetailsProps) => {
               </>
             </Text>
           ) : null}
+          {movement?.value? (
+            <Text>
+              <>
+                <strong>{"Valor de la compra"}: $</strong>{" "}
+                {movement?.value}
+              </>
+            </Text>
+          ) : null}
           <Text>
             <strong>{"Fecha"}:</strong> {formatDatetime(movement?.date)}
           </Text>

@@ -88,11 +88,21 @@ const FormCreateBuyDetail = ({ index }: FormCreateOwnerProps) => {
             )}
           />
 
-          <FormInputText
+          <FormInputNumber
             isRequired
-            inputProps={register(`stockMovementDetail.${index}.quantity`)}
+            control={control}
+            errorMessage={
+              errors.stockMovementDetail &&
+              errors.stockMovementDetail[index]?.quantity
+                ? `errors.${errors.stockMovementDetail[index]?.quantity?.message}`
+                : // TODO: Deberia eleminar este casteo: `as string`
+                  undefined
+            }
+            id="quantity"
+            name={`stockMovementDetail.${index}.quantity`} 
+            thousandSeparator="."
+            //inputProps={register(`stockMovementDetail.${index}.quantity`)}
             label={"Cantidad"}
-            name="quantity"
           />
           <FormInputNumber
             isRequired
@@ -105,6 +115,7 @@ const FormCreateBuyDetail = ({ index }: FormCreateOwnerProps) => {
                   undefined
             }
             id="value"
+            thousandSeparator="."
             label={"Valor de compra"}
             leftIcon="$"
             name={`stockMovementDetail.${index}.buyPrice`}

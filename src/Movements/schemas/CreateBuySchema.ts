@@ -15,13 +15,14 @@ export const productOptionItem = z.object({
 export const StockMovementDetailSchema = z.object({
   product: productOptionItem,
   quantity: z.string().transform((val, ctx) => {
-    const parsed = Number.parseInt(val.replaceAll(".", ""), 10);
+    const parsed = Number.parseFloat(
+      val.replaceAll(".", "").replaceAll(",", ".")
+    );
     if (Number.isNaN(parsed)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Required",
       });
-
       return z.NEVER;
     }
     if (parsed <= 0) {
@@ -29,19 +30,20 @@ export const StockMovementDetailSchema = z.object({
         code: z.ZodIssueCode.custom,
         message: "mustBePositive",
       });
-
       return z.NEVER;
     }
     return parsed;
   }),
   buyPrice: z.string().transform((val, ctx) => {
-    const parsed = Number.parseInt(val.replaceAll(".", ""), 10);
+    // Reemplaza la coma con un punto para aceptar números con separador decimal
+    const parsed = Number.parseFloat(
+      val.replaceAll(".", "").replaceAll(",", ".")
+    );
     if (Number.isNaN(parsed)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Required",
       });
-
       return z.NEVER;
     }
     if (parsed <= 0) {
@@ -49,7 +51,6 @@ export const StockMovementDetailSchema = z.object({
         code: z.ZodIssueCode.custom,
         message: "mustBePositive",
       });
-
       return z.NEVER;
     }
     return parsed;
@@ -64,13 +65,14 @@ const createBuySchema = z.object({
   date: z.date(),
   stockMovementDetail: z.array(StockMovementDetailSchema),
   value: z.string().transform((val, ctx) => {
-    const parsed = Number.parseInt(val.replaceAll(".", ""), 10);
+    const parsed = Number.parseFloat(
+      val.replaceAll(".", "").replaceAll(",", ".")
+    );
     if (Number.isNaN(parsed)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Required",
       });
-
       return z.NEVER;
     }
     if (parsed <= 0) {
@@ -78,7 +80,6 @@ const createBuySchema = z.object({
         code: z.ZodIssueCode.custom,
         message: "mustBePositive",
       });
-
       return z.NEVER;
     }
     return parsed;
