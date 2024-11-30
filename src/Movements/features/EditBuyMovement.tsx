@@ -4,25 +4,29 @@ import { Controller, FieldErrors, useFormContext } from "react-hook-form";
 import { Button, useDisclosure, useToast } from "@chakra-ui/react";
 
 import { useTranslation } from "Base/i18n";
-import useCreateMovementsStates from "Movements/hooks/useCreateMovementsStates";
-import { useCreateMovementsService } from "Movements/data/MovementsRepository";
 import FormPageLayout from "Base/layout/FormPageLayout";
 import FormContainerLayout from "Base/layout/FormContainerLayout";
 import FormSectionLayout from "Base/layout/FormSectionLayout";
 import FormInputNumber from "Base/components/FormInputNumber";
-import ConfirmCreateModal from "Movements/components/ConfirmCreateDialog";
-import FormCreateBuyDetails from "./FormCreateBuyDetails";
-import { CreateBuySchema } from "Movements/schemas/CreateBuySchema";
 import { FormInputText, FormSelect } from "Base/components";
+
+import useCreateMovementsStates from "Movements/hooks/useCreateMovementsStates";
+import ConfirmCreateModal from "Movements/components/ConfirmCreateDialog";
+import { CreateBuySchema } from "Movements/schemas/CreateBuySchema";
 import useWareHouseOptions from "Movements/hooks/useWareHouseOptions";
 import useCreateBuyContext from "Movements/contexts/CreateBuyContext/hooks/useCreateBuyContext";
+import useEditBuyMovementService from "Movements/data/MovementsRepository/hooks/useEditBuyMovementService";
 
-// import { StatusCard } from "Base/components";
+import FormCreateBuyDetails from "./FormCreateBuyDetails";
 
-interface CreateMovementsProps {
+interface EditBuyMovementProps {
+  movementId: number;
   navigateToMovements: () => void;
 }
-const CreateBuyMovement = ({ navigateToMovements }: CreateMovementsProps) => {
+const EditBuyMovement = ({
+  movementId,
+  navigateToMovements,
+}: EditBuyMovementProps) => {
   const toast = useToast();
   const { t } = useTranslation("movements");
   const {
@@ -40,12 +44,14 @@ const CreateBuyMovement = ({ navigateToMovements }: CreateMovementsProps) => {
 
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: false });
 
-  const { createMovements } = useCreateMovementsService();
+  const { editBuyMovement } = useEditBuyMovementService();
 
   const handleCreateMovements = (data: CreateBuySchema) => {
+    console.log("startFetch :>> ", data);
     startFetch();
 
-    createMovements({
+    console.log(data);
+    editBuyMovement(movementId, {
       stockMovementDetail: data.stockMovementDetail.map((detail) => ({
         productId: detail.product.id,
         quantity: detail.quantity,
@@ -55,7 +61,7 @@ const CreateBuyMovement = ({ navigateToMovements }: CreateMovementsProps) => {
       date: new Date(),
       description: data.description,
       movementType: data.movementType,
-      value: data.value, // hardcode
+      value: data.value,
     })
       .then((movementsCreated) => {
         reset();
@@ -167,4 +173,4 @@ const CreateBuyMovement = ({ navigateToMovements }: CreateMovementsProps) => {
   );
 };
 
-export default CreateBuyMovement;
+export default EditBuyMovement;
