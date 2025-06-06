@@ -1,0 +1,34 @@
+{
+  "actions": {
+    "create": "Agregar siembra"
+  },
+  "datatable": {
+    "label": {
+      "description": "Descripción",
+      "hectares": "Hectáreas"
+    }
+  },
+  "create": {
+    "label": {
+      "description": "Descripción",
+      "hectares": "Hectáreas"
+    },
+    "title": "Añadir siembra",
+    "button": {
+      "submit": "Añadir siembra"
+    }
+  },
+  "toast": {
+    "create": {
+      "success": "Siembra agregada con exito"
+    }
+  },
+  "modal": {
+    "button": {
+      "buttonConfirm": "Confirmar",
+      "buttonCancel": "Cancelar"
+    },
+    "title": "Añadir nueva siembra",
+    "description": "¿Esta seguro que desea añadir la siembra?"
+  }
+}

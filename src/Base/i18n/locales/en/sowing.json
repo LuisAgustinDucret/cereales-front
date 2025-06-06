@@ -1,0 +1,34 @@
+{
+  "actions": {
+    "create": "Add Sowing"
+  },
+  "datatable": {
+    "label": {
+      "description": "Description",
+      "hectares": "Hectares"
+    }
+  },
+  "create": {
+    "label": {
+      "description": "Description",
+      "hectares": "Hectares"
+    },
+    "title": "Add sowing",
+    "button": {
+      "submit": "Add sowing"
+    }
+  },
+  "toast": {
+    "create": {
+      "success": "Sowing added successfully"
+    }
+  },
+  "modal": {
+    "button": {
+      "buttonConfirm": "Confirm",
+      "buttonCancel": "Cancel"
+    },
+    "title": "Add new sowing",
+    "description": "Are you sure you want to add the sowing?"
+  }
+}

@@ -50,6 +50,11 @@ const AppLayout = ({ children }: PropsWithChildren) => {
       path: "/movements",
       icon: BriefcaseIcon,
     },
+    {
+      title: t("sidebar.menu.sowing"),
+      path: "/sowing",
+      icon: BriefcaseIcon,
+    },
   ];
 
   return (
