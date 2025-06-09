@@ -6,12 +6,14 @@ interface MovementsHeaderProps {
   navigateToCreateBuyMovement: () => void;
   navigateToCreateAplication: () => void;
   navigateToCreateWithdraw: () => void;
+  navigateToCreateSeeding: () => void;
 }
 
 const MovementsHeader = ({
   navigateToCreateBuyMovement,
   navigateToCreateAplication,
   navigateToCreateWithdraw,
+  navigateToCreateSeeding,
 }: MovementsHeaderProps) => {
   const { t } = useTranslation(["movements"]);
 
@@ -38,6 +40,14 @@ const MovementsHeader = ({
           onClick={navigateToCreateAplication}
         >
           {"Generar aplicacion"}
+        </Button>
+        <Button
+          leftIcon={<Icon as={PlusIcon} />}
+          mr="2"
+          variant="outline"
+          onClick={navigateToCreateSeeding}
+        >
+          {"Registrar siembra"}
         </Button>
       </Stack>
     </Stack>
