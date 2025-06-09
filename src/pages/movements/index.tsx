@@ -23,6 +23,11 @@ const MovementsPage = () => {
     [router]
   );
 
+  const navigateToCreateSeeding = useCallback(
+    () => router.push("/movements/create-seeding"),
+    [router]
+  );
+
   const navigateToDetails = useCallback(
     (movementId: number) => router.push(`/movements/${movementId}`),
     [router]
@@ -36,6 +41,7 @@ const MovementsPage = () => {
             navigateToCreateBuyMovement={navigateToCreateBuyMovement}
             navigateToCreateAplication={navigateToCreateAplication}
             navigateToCreateWithdraw={navigateToCreateWithdraw}
+            navigateToCreateSeeding={navigateToCreateSeeding}
           />
         ),
         content: <MovementsList navigateToDetails={navigateToDetails} />,

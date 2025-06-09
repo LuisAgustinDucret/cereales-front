@@ -8,6 +8,9 @@ export default function getMovementTypeColor(
     case "APLICATION": {
       return "yellow";
     }
+    case "SEEDING": {
+      return "purple";
+    }
     case "RENDITION": {
       return "red";
     }

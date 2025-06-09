@@ -46,7 +46,11 @@ const MovementDetails = ({ movement }: MovementDetailsProps) => {
             colorScheme={getMovementTypeColor(movement?.movementType)}
             fontSize={{ md: "md" }}
           >
-            {movement?.movementType == "BUY" ? " COMPRA " : " APLICACION "}
+            {movement?.movementType === "BUY"
+              ? "COMPRA"
+              : movement?.movementType === "SEEDING"
+              ? "SIEMBRA"
+              : "APLICACION"}
           </Badge>
         </Heading>
         <Stack direction={{ base: "column" }} mt={4} spacing={2}>
