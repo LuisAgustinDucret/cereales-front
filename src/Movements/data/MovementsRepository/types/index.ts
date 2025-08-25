@@ -90,4 +90,5 @@ export interface MovementsRepository {
   createBuyMovements: (body: CreateMovementDto) => Promise<Movements>;
   getAllMovements: () => Promise<MovementListItem[]>;
   getMovementById: (movementId: number) => Promise<Movements>;
+  editBuyMovement: (movementId: number, body: CreateMovementDto) => Promise<Movements>;
 }

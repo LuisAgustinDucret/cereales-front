@@ -33,6 +33,12 @@ const MovementsPage = () => {
     [router]
   );
 
+
+  const navigateToEdit = useCallback(
+    (movementId: number) => router.push(`/movements/edit/${movementId}`),
+    [router]
+  );
+
   return (
     <MovementsLayout>
       {{
@@ -44,7 +50,7 @@ const MovementsPage = () => {
             navigateToCreateSeeding={navigateToCreateSeeding}
           />
         ),
-        content: <MovementsList navigateToDetails={navigateToDetails} />,
+        content: <MovementsList navigateToDetails={navigateToDetails} navigateToEdit={navigateToEdit} />,
       }}
     </MovementsLayout>
   );
